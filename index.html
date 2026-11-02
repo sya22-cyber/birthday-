@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🎂</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff8ebc, #a98cff);
+      text-align: center;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .container {
+      padding: 50px 20px 80px;
+    }
+
+    .cake {
+      width: 250px;
+      height: 250px;
+      margin: 35px auto;
+      position: relative;
+    }
+
+    .cake-top, .cake-middle, .cake-bottom {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 18px;
+    }
+
+    .cake-top {
+      width: 130px;
+      height: 55px;
+      bottom: 130px;
+      background: #ffb6d5;
+    }
+
+    .cake-middle {
+      width: 190px;
+      height: 65px;
+      bottom: 65px;
+      background: #ff75ae;
+    }
+
+    .cake-bottom {
+      width: 250px;
+      height: 70px;
+      bottom: 0;
+      background: #e83e7b;
+    }
+
+    .candle {
+      width: 15px;
+      height: 55px;
+      background: white;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 185px;
+      border-radius: 5px;
+      z-index: 2;
+    }
+
+    .flame {
+      position: absolute;
+      top: -38px;
+      left: -8px;
+      width: 31px;
+      height: 40px;
+      background: #ffd166;
+      border-radius: 50%;
+      animation: fire 0.5s infinite alternate;
+    }
+
+    .flame.off {
+      display: none;
+    }
+
+    @keyframes fire {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+
+    button {
+      padding: 16px 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 20px;
+      background: white;
+      color: #e83e7b;
+    }
+
+    #message {
+      display: none;
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 25px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      line-height: 1.7;
+    }
+
+    #music {
+      display: none;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 15px;
+      z-index: 10;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🎂 Happy Birthday! 🎉</h1>
+    <p>Make a wish before you celebrate ✨</p>
+
+    <div class="cake">
+
+      <div class="candle">
+        <div class="flame" id="flame"></div>
+      </div>
+
+      <div class="cake-top"></div>
+      <div class="cake-middle"></div>
+      <div class="cake-bottom"></div>
+
+    </div>
+
+    <button onclick="celebrate()" id="celebrateBtn">
+      🎉 Rayakan!
+    </button>
+
+    <div id="message">
+      <h2>🎂 Happy Birthday! 💖</h2>
+
+      Hari ini adalah hari spesial kamu. Semoga di umur yang baru ini,
+      kamu mendapatkan lebih banyak kebahagiaan dan hal-hal baik.
+
+      <br><br>
+
+      Terima kasih karena sudah bertahan sampai sejauh ini.
+      Mungkin nggak semua hari mudah, tapi kamu berhasil sampai
+      di hari ini dan itu pantas untuk dirayakan.
+
+      <br><br>
+
+      I hope this new chapter brings you happiness, beautiful memories,
+      genuine people, and many reasons to smile.
+
+      <br><br>
+
+      🎉 Happy Birthday! Keep smiling, keep going, and don't forget
+      to make a wish. 🎂💖✨
+    </div>
+
+    <!-- Lagu Perfect -->
+    <iframe
+      id="music"
+      width="0"
+      height="0"
+      src=""
+      allow="autoplay; encrypted-media">
+    </iframe>
+
+  </div>
+
+  <script>
+    let celebrated = false;
+
+    function celebrate() {
+      if (celebrated) return;
+
+      celebrated = true;
+
+      // Lilin padam
+      document.getElementById("flame").classList.add("off");
+
+      // Ucapan muncul
+      document.getElementById("message").style.display = "block";
+
+      // Tombol berubah
+      document.getElementById("celebrateBtn").innerHTML =
+        "🎂 Happy Birthday! 💖";
+
+      // Putar lagu Perfect
+      document.getElementById("music").src =
+        "https://www.youtube.com/embed/cNGjD0VG4R8?autoplay=1";
+
+      // Confetti
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background =
+          "hsl(" + Math.random() * 360 + ", 90%, 60%)";
+        confetti.style.animationDuration =
+          (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
